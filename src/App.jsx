@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.scss';
 
 class App extends Component {
+  user = {
+    name: 'Jozef',
+    surname: 'Piecyk'
+  };
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React - hejo typki</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <h1>tu trafi cała appka</h1>
+      <div>
+        <header className="main-header">Duke</header>
+        <div className="App">
+          <div className="board-wrapper">Game Board</div>
+          <div className="menu-wrapper">menu</div>
+        </div>
       </div>
     );
   }
