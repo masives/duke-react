@@ -1,6 +1,16 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 import './index.scss';
 import App from './App';
 
-ReactDOM.render(<App />, document.getElementById('app'));
+const renderApp = () => {
+  render(<App />, document.getElementById('app'));
+};
+
+renderApp();
+
+if (module.hot) {
+  module.hot.accept('./App', () => {
+    renderApp();
+  });
+}

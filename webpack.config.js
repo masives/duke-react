@@ -1,17 +1,25 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'development',
   context: __dirname,
-  entry: './src/entry.jsx',
+  entry: [
+    'react-hot-loader/patch', // hot module replacement
+    'webpack-dev-server/client?http://localhost:8080', // hot module replacement
+    'webpack/hot/only-dev-server', // hot module replacement
+    './src/entry.jsx'
+  ],
   output: {
-    path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js'
+    path: path.join(__dirname, 'public'),
+    filename: 'bundle.js',
+    publicPath: '/public/'
   },
   devtool: 'cheap-eval-source-map',
   devServer: {
-    publicPath: '/dist',
+    hot: true, // hot module replacement
+    publicPath: '/public',
     historyApiFallback: true
   },
   resolve: {
@@ -49,6 +57,8 @@ module.exports = {
     ]
   },
   plugins: [
+    new webpack.HotModuleReplacementPlugin(), // hot module replacement
+    new webpack.NamedModulesPlugin(), // hot module replacement
     new HtmlWebpackPlugin({
       template: './index.html'
     })
