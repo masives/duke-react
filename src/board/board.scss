@@ -1,3 +1,19 @@
-.board-wrapper {
+.board {
   width: 80%;
+}
+
+.board-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+$height: 6;
+$width: 6;
+
+.board-cell {
+  min-height: 100px;
+  width: calc((100% / 6) - 20px);
+  background-color: #f00;
+  padding: 6px;
+  border: 1px solid #ccc;
 }
