@@ -5,7 +5,19 @@ import CellComponent from './cell/cell-component';
 
 export class Board extends Component {
   state = {
-    currentPlayer: 'white'
+    currentPlayer: 'white',
+    targetedCell: {
+      x: '',
+      y: ''
+    }
+  };
+
+  onCellClicked = coordinates => {
+    console.log(coordinates);
+    this.setState({
+      targetedCell: coordinates
+    });
+    console.log(this.state.targetedCell);
   };
 
   initializeCells() {
@@ -27,7 +39,14 @@ export class Board extends Component {
         <h1>tu będą celki, na poszczególne</h1>
         <h2>obecny gracz: {this.state.currentPlayer}</h2>
         <div className="board-wrapper">
-          {this.Cells.map(cell => <CellComponent key={cell.key} coordinatex={cell.x} coordinatey={cell.y} />)}
+          {this.Cells.map(cell => (
+            <CellComponent
+              key={cell.key}
+              coordinatex={cell.x}
+              coordinatey={cell.y}
+              onCellClicked={this.onCellClicked}
+            />
+          ))}
         </div>
       </div>
     );
