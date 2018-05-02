@@ -1,50 +1,39 @@
 // @flow
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
-export class Cell extends Component {
-  state = {
-    color: 'white',
-    coordinates: {
-      x: this.props.coordinatex,
-      y: this.props.coordinatey
-    }
+export class Cell extends PureComponent<{ coordinatex: number, coordinatey: number, onCellClicked: Function }> {
+  state: CellState = {
+    color: '',
+    coordinates: { x: 0, y: 0 },
+    unit: ''
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.setCoordinates(this.props.coordinatex, this.props.coordinatey);
   }
 
-  setCoordinates(x, y) {
+  setCoordinates(x: number, y: number) {
     this.setState({
-      coordinates: {
-        x,
-        y
-      }
+      coordinates: { x, y }
     });
   }
 
-  props: { coordinatex: number, coordinatey: number, onCellClicked: Function };
+  cellClicked = () => {
+    this.props.onCellClicked(this.state);
+  };
+
+  // props: { coordinatex: number, coordinatey: number, onCellClicked: Function };
   render() {
     return (
-      <div className="board-cell">
+      <button className="board-cell" onClick={this.cellClicked} onKeyPress={this.cellClicked}>
         <p>
           board cell {this.props.coordinatex} {this.props.coordinatey}
         </p>
         <p>current player = {this.state.color}</p>
-        <input
-          type="text"
-          onClick={() => {
-            console.log(`current x ${this.props.onCellClicked(this.state.coordinates)}`);
-          }}
-        />
-      </div>
+      </button>
     );
   }
 }
-
-// const Cell = (props: { coordinatex: number, coordinatey: number }) => (
-//
-// );
 
 export default Cell;

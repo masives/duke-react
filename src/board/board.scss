@@ -12,7 +12,7 @@ $width: 6;
 
 .board-cell {
   min-height: 100px;
-  width: calc((100% / 6) - 20px);
+  width: calc(100% / 6);
   background-color: #f00;
   padding: 6px;
   border: 1px solid #ccc;

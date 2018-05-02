@@ -1,3 +1,5 @@
+//
+
 import React, { Component } from 'react';
 import './board.scss';
 import configuration from '../config/index.json';
@@ -12,12 +14,12 @@ export class Board extends Component {
     }
   };
 
-  onCellClicked = coordinates => {
-    console.log(coordinates);
+  onCellClicked = clickedCellProps => {
+    console.log('received from cell', clickedCellProps);
     this.setState({
-      targetedCell: coordinates
+      targetedCell: clickedCellProps
     });
-    console.log(this.state.targetedCell);
+    console.log('current target cell', this.state.targetedCell);
   };
 
   initializeCells() {
