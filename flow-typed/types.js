@@ -3,5 +3,7 @@
 export type CellState = {
   color: string,
   coordinates: Object & { x: number, y: number },
-  unit: String
+  unitType: string,
+  polarity: string,
+  selected: boolean
 };

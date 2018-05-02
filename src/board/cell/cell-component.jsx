@@ -1,12 +1,16 @@
 // @flow
 
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 
-export class Cell extends PureComponent<{ coordinatex: number, coordinatey: number, onCellClicked: Function }> {
+type cellPropTypes = { coordinatex: number, coordinatey: number, onCellClicked: Function };
+
+export class Cell extends Component<cellPropTypes, CellState> {
   state: CellState = {
     color: '',
     coordinates: { x: 0, y: 0 },
-    unit: ''
+    unitType: '',
+    polarity: '',
+    selected: false
   };
 
   componentDidMount() {
