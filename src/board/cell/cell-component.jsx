@@ -27,12 +27,11 @@ export class Cell extends Component<cellPropTypes, CellState> {
     this.props.onCellClicked(this.state);
   };
 
-  // props: { coordinatex: number, coordinatey: number, onCellClicked: Function };
   render() {
     return (
       <button className="board-cell" onClick={this.cellClicked} onKeyPress={this.cellClicked}>
         <p>
-          board cell {this.props.coordinatex} {this.props.coordinatey}
+          board cell x - {this.props.coordinatex} y - {this.props.coordinatey}
         </p>
         <p>current player = {this.state.color}</p>
       </button>
