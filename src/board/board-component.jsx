@@ -2,13 +2,13 @@
 
 import React, { Component } from 'react';
 import './board.scss';
-import configuration from '../config/index.json';
 import CellComponent from './cell/cell-component';
 import InitialSetupHandlerComponent from './event-handlers/InitialSetupHandler';
 
 const initialSetupHandler = new InitialSetupHandlerComponent();
+type BoardState = { currentPlayer: string, gameStage: string, targetedCell: CellState, boardCells: CellState };
 
-export class Board extends Component<null, { currentPlayer: string, gameStage: string, targetedCell: CellState }> {
+export class Board extends Component<null, BoardState> {
   state = {
     currentPlayer: 'white',
     gameStage: 'initialSetup',
@@ -38,26 +38,9 @@ export class Board extends Component<null, { currentPlayer: string, gameStage: s
   };
 
   initializeCells() {
-    const Cells = [];
-    for (let i = 0; i < this.width; i += 1) {
-      for (let j = 0; j < this.width; j += 1) {
-        Cells.push({
-          coordinates: {
-            x: j,
-            y: i
-          },
-          color: '',
-          unitType: '',
-          polarity: '',
-          selected: false,
-          targeted: false
-        });
-      }
-    }
+    const Cells: Array<CellState> = initialSetupHandler.generateCells();
     this.setState({ boardCells: Cells });
   }
-  width = configuration.boardSize.width;
-  height = configuration.boardSize.height;
 
   render() {
     return (

@@ -30,6 +30,26 @@ class InitialSetupHandler {
   };
 
   initialDukeRow = (color: string) => (color === 'white' ? 0 : configuration.boardSize.height - 1);
+
+  generateCells = () => {
+    const Cells: Array<CellState> = [];
+    for (let i = 0; i < configuration.boardSize.width; i += 1) {
+      for (let j = 0; j < configuration.boardSize.width; j += 1) {
+        Cells.push({
+          coordinates: {
+            x: j,
+            y: i
+          },
+          color: '',
+          unitType: '',
+          polarity: '',
+          selected: false,
+          targeted: false
+        });
+      }
+    }
+    return Cells;
+  };
 }
 
 export default InitialSetupHandler;
