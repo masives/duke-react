@@ -12,8 +12,12 @@ export class Board extends Component<null, { currentPlayer: string, gameStage: s
   state = {
     currentPlayer: 'white',
     gameStage: 'initialSetup',
+    boardCells: [],
     targetedCell: {}
   };
+  componentDidMount() {
+    this.initializeCells();
+  }
 
   onCellClicked = (clickedCellProps: CellState) => {
     this.setState({
@@ -37,14 +41,23 @@ export class Board extends Component<null, { currentPlayer: string, gameStage: s
     const Cells = [];
     for (let i = 0; i < this.width; i += 1) {
       for (let j = 0; j < this.width; j += 1) {
-        Cells.push({ x: j, y: i, key: `cell-${j}-${i}` });
+        Cells.push({
+          coordinates: {
+            x: j,
+            y: i
+          },
+          color: '',
+          unitType: '',
+          polarity: '',
+          selected: false,
+          targeted: false
+        });
       }
     }
-    return Cells;
+    this.setState({ boardCells: Cells });
   }
   width = configuration.boardSize.width;
   height = configuration.boardSize.height;
-  Cells = this.initializeCells();
 
   render() {
     return (
@@ -52,11 +65,10 @@ export class Board extends Component<null, { currentPlayer: string, gameStage: s
         <h1>tu będą celki, na poszczególne</h1>
         <h2>obecny gracz: {this.state.currentPlayer}</h2>
         <div className="board-wrapper">
-          {this.Cells.map(cell => (
+          {this.state.boardCells.map(cell => (
             <CellComponent
-              key={cell.key}
-              coordinatex={cell.x}
-              coordinatey={cell.y}
+              key={`cell-${cell.coordinates.x}-${cell.coordinates.y}`}
+              cellState={cell}
               onCellClicked={this.onCellClicked}
             />
           ))}

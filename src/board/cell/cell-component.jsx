@@ -2,38 +2,35 @@
 
 import React, { Component } from 'react';
 
-type cellPropTypes = { coordinatex: number, coordinatey: number, onCellClicked: Function };
-
-export class Cell extends Component<cellPropTypes, CellState> {
-  state: CellState = {
-    color: '',
-    coordinates: { x: 0, y: 0 },
-    unitType: '',
-    polarity: '',
-    selected: false
-  };
-
-  componentDidMount() {
-    this.setCoordinates(this.props.coordinatex, this.props.coordinatey);
-  }
-
-  setCoordinates(x: number, y: number) {
-    this.setState({
-      coordinates: { x, y }
-    });
-  }
-
+type CellProps = {
+  key: string,
+  onCellClicked: Function,
+  cellState: CellState
+};
+export class Cell extends Component<CellProps, null> {
   cellClicked = () => {
     this.props.onCellClicked(this.state);
   };
 
+  props: {
+    cellState: {
+      color: string,
+      coordinates: Object & { x: number, y: number },
+      unitType: string,
+      polarity: string,
+      selected: boolean
+    },
+    key: string,
+    onCellClicked: Function
+  };
+
   render() {
     return (
-      <button className="board-cell" onClick={this.cellClicked} onKeyPress={this.cellClicked}>
+      <button className="board-cell" onClick={this.cellClicked} onKeyPress={this.cellClicked} key={this.props.key}>
         <p>
-          board cell x - {this.props.coordinatex} y - {this.props.coordinatey}
+          board cell x - {this.props.cellState.coordinates.x} y - {this.props.cellState.coordinates.y}
         </p>
-        <p>current player = {this.state.color}</p>
+        <p>current player = {this.props.cellState.color}</p>
       </button>
     );
   }
