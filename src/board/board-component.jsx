@@ -6,7 +6,12 @@ import CellComponent from './cell/cell-component';
 import InitialSetupHandlerComponent from './event-handlers/InitialSetupHandler';
 
 const initialSetupHandler = new InitialSetupHandlerComponent();
-type BoardState = { currentPlayer: string, gameStage: string, targetedCell: CellState, boardCells: CellState };
+type BoardState = {
+  currentPlayer: string,
+  gameStage: string,
+  targetedCell: CellState | Object,
+  boardCells: Array<Array>
+};
 
 export class Board extends Component<null, BoardState> {
   state = {
@@ -19,22 +24,21 @@ export class Board extends Component<null, BoardState> {
     this.initializeCells();
   }
 
-  onCellClicked = (clickedCellProps: CellState) => {
-    this.setState({
-      targetedCell: clickedCellProps
-    });
-    console.log('current target cell', this.state.targetedCell);
-    this.dispatchClickHandling(clickedCellProps);
+  onCellClicked = (coordinates: Coordinates) => {
+    this.setState(
+      {
+        targetedCell: this.state.boardCells[coordinates.x][coordinates.y]
+      },
+      this.dispatchClickHandling
+    );
   };
 
-  dispatchClickHandling = (cell: CellState) => {
+  dispatchClickHandling = () => {
+    console.log('strzał na handling');
     if (this.state.gameStage === 'initialSetup') {
-      initialSetupHandler.handleInitialSetup(cell, this.state.currentPlayer);
+      initialSetupHandler.handleInitialSetup(this.state.targetedCell, this.state.currentPlayer);
+      // initialSetupHandler.handleInitialSetup(cell, this.state.currentPlayer);
     }
-  };
-
-  initializeGame = () => {
-    this.state.gameStage = 'initialSetup';
   };
 
   initializeCells() {
@@ -48,13 +52,15 @@ export class Board extends Component<null, BoardState> {
         <h1>tu będą celki, na poszczególne</h1>
         <h2>obecny gracz: {this.state.currentPlayer}</h2>
         <div className="board-wrapper">
-          {this.state.boardCells.map(cell => (
-            <CellComponent
-              key={`cell-${cell.coordinates.x}-${cell.coordinates.y}`}
-              cellState={cell}
-              onCellClicked={this.onCellClicked}
-            />
-          ))}
+          {this.state.boardCells.map((cellRow: Array<CellState>) =>
+            cellRow.map((cell: CellState) => (
+              <CellComponent
+                key={`cell-${cell.coordinates.x}-${cell.coordinates.y}`}
+                cellState={cell}
+                onCellClicked={this.onCellClicked}
+              />
+            ))
+          )}
         </div>
       </div>
     );
