@@ -10,7 +10,7 @@ type BoardState = {
   currentPlayer: string,
   gameStage: string,
   targetedCell: CellState | Object,
-  boardCells: Array<Array>
+  boardCells: Array<Array<CellState>>
 };
 
 export class Board extends Component<null, BoardState> {
