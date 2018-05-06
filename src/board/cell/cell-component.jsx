@@ -27,6 +27,7 @@ export class Cell extends Component<CellProps, null> {
       <button className="board-cell" onClick={this.cellClicked} onKeyPress={this.cellClicked}>
         <p>row - {this.props.cellState.coordinates.x}</p>
         <p>col - {this.props.cellState.coordinates.y}</p>
+        <p>unit - {this.props.cellState.unitType}</p>
         <p>current player = {this.props.cellState.color}</p>
       </button>
     );

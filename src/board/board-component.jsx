@@ -10,41 +10,29 @@ type BoardState = {
   currentPlayer: string,
   gameStage: string,
   targetedCell: CellState | Object,
-  boardCells: Array<Array<CellState>>
+  boardCells: BoardCells
 };
 
 export class Board extends Component<null, BoardState> {
   state = {
     currentPlayer: 'white',
     gameStage: 'initialSetup',
-    boardCells: [],
+    boardCells: initialSetupHandler.generateCells(),
     targetedCell: {}
   };
-  componentDidMount() {
-    this.initializeCells();
-  }
 
   onCellClicked = (coordinates: Coordinates) => {
-    this.setState(
-      {
-        targetedCell: this.state.boardCells[coordinates.x][coordinates.y]
-      },
-      this.dispatchClickHandling
-    );
+    this.setState({ targetedCell: this.state.boardCells[coordinates.x][coordinates.y] }, this.dispatchClickHandling);
   };
 
   dispatchClickHandling = () => {
-    console.log('strzał na handling');
     if (this.state.gameStage === 'initialSetup') {
-      initialSetupHandler.handleInitialSetup(this.state.targetedCell, this.state.currentPlayer);
-      // initialSetupHandler.handleInitialSetup(cell, this.state.currentPlayer);
+      const handlingResult = initialSetupHandler.handleInitialSetup(this.state.targetedCell, this.state.currentPlayer);
+      if (handlingResult) {
+        this.setState(handlingResult);
+      }
     }
   };
-
-  initializeCells() {
-    const Cells: Array<CellState> = initialSetupHandler.generateCells();
-    this.setState({ boardCells: Cells });
-  }
 
   render() {
     return (

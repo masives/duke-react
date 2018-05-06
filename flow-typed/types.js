@@ -1,6 +1,9 @@
 // @flow
 
-export type Coordinates = Object & { x: number, y: number };
+export type Coordinates = Object & {
+  x: number,
+  y: number
+};
 
 export type CellState = {
   color: string,
@@ -9,3 +12,6 @@ export type CellState = {
   polarity: string,
   selected: boolean
 };
+
+// prettier-ignore
+export type BoardCells = Array < Array < CellState >> ;
