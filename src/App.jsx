@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.scss';
-import BoardComponent from './board/board-component';
+// import BoardComponent from './board/board-component';
+import GameHandlerComponent from './board/game-handler';
 
 class App extends Component {
   user = {
@@ -13,7 +14,8 @@ class App extends Component {
       <div>
         <header className="main-header">Duke</header>
         <div className="App">
-          <BoardComponent />
+          {/* <BoardComponent /> */}
+          <GameHandlerComponent />
           <div className="menu-wrapper">menu</div>
         </div>
       </div>
