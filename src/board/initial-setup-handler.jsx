@@ -57,7 +57,7 @@ class InitialSetupHandler {
 
   getAdjacentToDuke = (dukeCoordinates: Coordinates) => {
     console.log('dukeCoordinates', dukeCoordinates);
-    const result: Array = [];
+    const result: Array<Coordinates> = [];
     if (dukeCoordinates.col - 1 > 0) {
       result.push({ col: dukeCoordinates.col - 1, row: this.DukeCoordinates[this.currentPlayer].row });
     }
