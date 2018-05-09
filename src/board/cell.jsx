@@ -7,9 +7,13 @@ const Cell = (props: { onCellClicked: Function, cellState: CellState }) => {
     props.onCellClicked(props.cellState.coordinates);
   };
   return (
-    <button className="board-cell" onClick={cellClicked} onKeyPress={cellClicked}>
-      <p>row - {props.cellState.coordinates.x}</p>
-      <p>col - {props.cellState.coordinates.y}</p>
+    <button
+      className={`board-cell ${props.cellState.targeted ? 'targeted' : ''}`}
+      onClick={cellClicked}
+      onKeyPress={cellClicked}
+    >
+      <p>row - {props.cellState.coordinates.row}</p>
+      <p>col - {props.cellState.coordinates.col}</p>
       <p>unit - {props.cellState.unitType}</p>
       <p>current player = {props.cellState.color}</p>
     </button>

@@ -7,16 +7,16 @@ import BoardComponent from './board-component';
 const initialSetupHandler = new InitialSetupHandler();
 
 type GameHandlerState = {
-  board: BoardCells | Object,
+  board: BoardCells,
   gameStage: string,
-  targetedCell: CellState | Object,
+  targetedCell: CellState,
   currentPlayer: string
 };
 class GameHandler extends Component<null, GameHandlerState> {
   state = {
-    board: {},
+    board: null,
     gameStage: 'initialSetup',
-    targetedCell: {},
+    targetedCell: null,
     currentPlayer: 'white'
   };
 
@@ -25,7 +25,7 @@ class GameHandler extends Component<null, GameHandlerState> {
   }
 
   onCellClicked = (coordinates: Coordinates) => {
-    this.setState({ targetedCell: this.state.board[coordinates.x][coordinates.y] }, this.dispatchClickEvent);
+    this.setState({ targetedCell: this.state.board[coordinates.row][coordinates.col] }, this.dispatchClickEvent);
   };
 
   dispatchClickEvent = () => {
@@ -35,9 +35,15 @@ class GameHandler extends Component<null, GameHandlerState> {
     }
     console.log('result', result);
     if (result) {
-      this.setState({ board: result.board, currentPlayer: result.currentPlayer }, () => {
-        console.log(this.state);
-      });
+      this.setState(
+        {
+          board: result.board
+          // currentPlayer: result.currentPlayer
+        },
+        () => {
+          console.log(this.state);
+        }
+      );
     }
 
     // return result;

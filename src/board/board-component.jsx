@@ -13,7 +13,7 @@ const Board = (props: { board: BoardCells, currentPlayer: string, onCellClicked:
         {props.board.map((cellRow: Array<CellState>) =>
           cellRow.map((cell: CellState) => (
             <CellComponent
-              key={`cell-${cell.coordinates.x}-${cell.coordinates.y}`}
+              key={`cell-${cell.coordinates.row}-${cell.coordinates.col}`}
               cellState={cell}
               onCellClicked={listener}
             />

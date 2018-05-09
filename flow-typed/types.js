@@ -1,8 +1,8 @@
 // @flow
 
 export type Coordinates = Object & {
-  x: number,
-  y: number
+  row: number,
+  col: number
 };
 
 export type CellState = {
@@ -10,7 +10,8 @@ export type CellState = {
   coordinates: Coordinates,
   unitType: string,
   polarity: string,
-  selected: boolean
+  selected: boolean,
+  targeted: boolean
 };
 
 // prettier-ignore

@@ -10,8 +10,8 @@ export const generateCells = () => {
     for (let j = 0; j < configuration.boardSize.height; j += 1) {
       Cells[i][j] = {
         coordinates: {
-          x: i,
-          y: j
+          row: i,
+          col: j
         },
         color: '',
         unitType: '',
