@@ -71,7 +71,7 @@ class InitialSetupHandler {
         });
       }
 
-      if (this.initialSetupState[currentPlayer].dukeDrawn && this.initialSetupState[currentPlayer].knightsDrawn === 2) {
+      if (this.initialSetupState.black.dukeDrawn && this.initialSetupState[currentPlayer].knightsDrawn === 2) {
         result.gameStage = 'gameLoop';
       }
 
