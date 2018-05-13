@@ -37,8 +37,6 @@ class GameHandler extends Component<null, GameHandlerState> {
     if (result) {
       this.setState(result);
     }
-
-    // return result;
   };
 
   render() {

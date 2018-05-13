@@ -16,8 +16,7 @@ export const generateCells = () => {
         color: '',
         unitType: '',
         polarity: '',
-        selected: false,
-        targeted: false
+        state: ''
       };
     }
   }

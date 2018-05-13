@@ -10,8 +10,7 @@ export type CellState = {
   coordinates: Coordinates,
   unitType: string,
   polarity: string,
-  selected: boolean,
-  targeted: boolean
+  state: string
 };
 
 // prettier-ignore

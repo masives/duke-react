@@ -37,43 +37,39 @@ class InitialSetupHandler {
         });
 
         this.initialSetupState[currentPlayer].dukeDrawn = true;
-
         this.DukeCoordinates[currentPlayer] = targetCell.coordinates;
-        // const adjacentToDuke = this.getAdjacentToDuke(this.DukeCoordinates[color]);
-        // adjacentToDuke.map(coordinates => {
-        //   // this.mutableBoard[coordinates.row][coordinates.col].targeted = true;
-        //   return true;
-        // });
-        // console.log('adjacent to duke', adjacentToDuke);
+
+        const adjacentToDuke = this.getAdjacentToDuke(this.DukeCoordinates[currentPlayer]);
+        adjacentToDuke.forEach((coordinates: Coordinates) => {
+          result.board[coordinates.row][coordinates.col].state = 'targeted-draw';
+        });
         return result;
       }
     }
     if (this.initialSetupState[currentPlayer].dukeDrawn) {
-      console.log('siemka');
+      console.log('setup knights');
     }
-    console.log('duke coordinates', this.DukeCoordinates);
     return false;
   };
 
   initialDukeRow = (color: string) => (color === 'white' ? 0 : configuration.boardSize.height - 1);
 
-  // getAdjacentToDuke = (dukeCoordinates: Coordinates) => {
-  //   console.log('dukeCoordinates', dukeCoordinates);
-  //   const result: Array<Coordinates> = [];
-  //   if (dukeCoordinates.col - 1 > 0) {
-  //     result.push({ col: dukeCoordinates.col - 1, row: this.DukeCoordinates[this.currentPlayer].row });
-  //   }
-  //   if (dukeCoordinates.col + 1 < configuration.boardSize.height) {
-  //     result.push({ col: dukeCoordinates.col + 1, row: this.DukeCoordinates[this.currentPlayer].row });
-  //   }
-  //   if (dukeCoordinates.row - 1 > 0) {
-  //     result.push({ col: this.DukeCoordinates[this.currentPlayer].col, row: dukeCoordinates.row - 1 });
-  //   }
-  //   if (dukeCoordinates.col + 1 < configuration.boardSize.width) {
-  //     result.push({ col: this.DukeCoordinates[this.currentPlayer].col, row: dukeCoordinates.row + 1 });
-  //   }
-  //   return result;
-  // };
+  getAdjacentToDuke = (dukeCoordinates: Coordinates) => {
+    const result: Array<Coordinates> = [];
+    if (dukeCoordinates.col - 1 >= 0) {
+      result.push({ col: dukeCoordinates.col - 1, row: dukeCoordinates.row });
+    }
+    if (dukeCoordinates.col + 1 < configuration.boardSize.height) {
+      result.push({ col: dukeCoordinates.col + 1, row: dukeCoordinates.row });
+    }
+    if (dukeCoordinates.row - 1 >= 0) {
+      result.push({ col: dukeCoordinates.col, row: dukeCoordinates.row - 1 });
+    }
+    if (dukeCoordinates.col + 1 <= configuration.boardSize.width) {
+      result.push({ col: dukeCoordinates.col, row: dukeCoordinates.row + 1 });
+    }
+    return result;
+  };
 }
 
 export default InitialSetupHandler;
