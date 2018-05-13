@@ -13,11 +13,7 @@ class App extends Component {
     return (
       <div>
         <header className="main-header">Duke</header>
-        <div className="App">
-          {/* <BoardComponent /> */}
-          <GameHandlerComponent />
-          <div className="menu-wrapper">menu</div>
-        </div>
+        <GameHandlerComponent />
       </div>
     );
   }

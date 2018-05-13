@@ -41,11 +41,15 @@ class GameHandler extends Component<null, GameHandlerState> {
 
   render() {
     return (
-      <BoardComponent
-        board={this.state.board}
-        currentPlayer={this.state.currentPlayer}
-        onCellClicked={this.onCellClicked}
-      />
+      <section className="App">
+        <BoardComponent board={this.state.board} onCellClicked={this.onCellClicked} />
+
+        <div className="menu-wrapper">
+          <header>menu</header>
+          <p>obecny gracz: {this.state.currentPlayer}</p>
+          <p>etap: {this.state.gameStage}</p>
+        </div>
+      </section>
     );
   }
 }
