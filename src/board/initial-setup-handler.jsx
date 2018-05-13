@@ -58,12 +58,11 @@ class InitialSetupHandler {
       });
 
       this.initialSetupState[currentPlayer].knightsDrawn += 1;
-      console.log('knighted board', result.board);
-      console.log('cancel selection');
 
       if (this.initialSetupState[currentPlayer].knightsDrawn === 2) {
         result.currentPlayer = 'black';
 
+        // cancel selection, to be extracted
         result.board.forEach(row => {
           row.forEach(col => {
             col.state = ''; // eslint-disable-line no-param-reassign
@@ -97,7 +96,6 @@ class InitialSetupHandler {
     if (dukeCoordinates.row + 1 < configuration.boardSize.width) {
       result.push({ col: dukeCoordinates.col, row: dukeCoordinates.row + 1 });
     }
-    console.log('adjacent to duke', result);
     return result;
   };
 }
