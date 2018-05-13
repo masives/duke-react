@@ -9,20 +9,16 @@ const initialSetupHandler = new InitialSetupHandler();
 type GameHandlerState = {
   board: BoardCells,
   gameStage: string,
-  targetedCell: CellState,
+  targetedCell: CellState | null,
   currentPlayer: string
 };
 class GameHandler extends Component<null, GameHandlerState> {
   state = {
-    board: null,
+    board: generateCells(),
     gameStage: 'initialSetup',
     targetedCell: null,
     currentPlayer: 'white'
   };
-
-  componentWillMount() {
-    this.setState({ board: generateCells() });
-  }
 
   onCellClicked = (coordinates: Coordinates) => {
     this.setState({ targetedCell: this.state.board[coordinates.row][coordinates.col] }, this.dispatchClickEvent);
@@ -31,19 +27,15 @@ class GameHandler extends Component<null, GameHandlerState> {
   dispatchClickEvent = () => {
     let result: any;
     if (this.state.gameStage === 'initialSetup') {
-      result = initialSetupHandler.handleInitialSetup(this.state.targetedCell, this.state.currentPlayer);
+      result = initialSetupHandler.handleInitialSetup(
+        this.state.targetedCell,
+        this.state.currentPlayer,
+        this.state.board
+      );
     }
     console.log('result', result);
     if (result) {
-      this.setState(
-        {
-          board: result.board
-          // currentPlayer: result.currentPlayer
-        },
-        () => {
-          console.log(this.state);
-        }
-      );
+      this.setState(result);
     }
 
     // return result;
