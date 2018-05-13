@@ -46,9 +46,38 @@ class InitialSetupHandler {
         return result;
       }
     }
-    if (this.initialSetupState[currentPlayer].dukeDrawn) {
-      console.log('setup knights');
+    if (this.initialSetupState[currentPlayer].dukeDrawn && targetCell.state === 'targeted-draw') {
+      result.board = update(board, {
+        [targetCell.coordinates.row]: {
+          [targetCell.coordinates.col]: {
+            color: { $set: currentPlayer },
+            unitType: { $set: 'knight' },
+            state: { $set: '' }
+          }
+        }
+      });
+
+      this.initialSetupState[currentPlayer].knightsDrawn += 1;
+      console.log('knighted board', result.board);
+      console.log('cancel selection');
+
+      if (this.initialSetupState[currentPlayer].knightsDrawn === 2) {
+        result.currentPlayer = 'black';
+
+        result.board.forEach(row => {
+          row.forEach(col => {
+            col.state = ''; // eslint-disable-line no-param-reassign
+          });
+        });
+      }
+
+      if (this.initialSetupState[currentPlayer].dukeDrawn && this.initialSetupState[currentPlayer].knightsDrawn === 2) {
+        result.gameStage = 'gameLoop';
+      }
+
+      return result;
     }
+    console.log('error');
     return false;
   };
 
@@ -65,9 +94,10 @@ class InitialSetupHandler {
     if (dukeCoordinates.row - 1 >= 0) {
       result.push({ col: dukeCoordinates.col, row: dukeCoordinates.row - 1 });
     }
-    if (dukeCoordinates.col + 1 <= configuration.boardSize.width) {
+    if (dukeCoordinates.row + 1 < configuration.boardSize.width) {
       result.push({ col: dukeCoordinates.col, row: dukeCoordinates.row + 1 });
     }
+    console.log('adjacent to duke', result);
     return result;
   };
 }
