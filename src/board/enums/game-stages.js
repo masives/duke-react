@@ -1,0 +1,3 @@
+export const INITIAL_GAME_SETUP = 'INITIAL_GAME_SETUP';
+export const GAME_LOOP = 'GAME_LOOP';
+export const FINISHED_GAME = 'FINISHED_GAME';

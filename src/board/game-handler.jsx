@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import InitialSetupHandler from './initial-setup-handler';
 import { generateCells } from './helpers';
+import { INITIAL_GAME_SETUP } from './enums/game-stages';
 import BoardComponent from './board-component';
 
 const initialSetupHandler = new InitialSetupHandler();
@@ -15,7 +16,7 @@ type GameHandlerState = {
 class GameHandler extends Component<null, GameHandlerState> {
   state = {
     board: generateCells(),
-    gameStage: 'initialSetup',
+    gameStage: INITIAL_GAME_SETUP,
     targetedCell: null,
     currentPlayer: 'white'
   };
@@ -26,7 +27,7 @@ class GameHandler extends Component<null, GameHandlerState> {
 
   dispatchClickEvent = () => {
     let result: any;
-    if (this.state.gameStage === 'initialSetup') {
+    if (this.state.gameStage === INITIAL_GAME_SETUP) {
       result = initialSetupHandler.handleInitialSetup(
         this.state.targetedCell,
         this.state.currentPlayer,

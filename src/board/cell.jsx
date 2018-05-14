@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react';
+import { TARGETED_DRAW } from './enums/cell-status';
 
 const Cell = (props: { onCellClicked: Function, cellState: CellState }) => {
   const cellClicked = () => {
@@ -8,7 +9,7 @@ const Cell = (props: { onCellClicked: Function, cellState: CellState }) => {
   };
   return (
     <button
-      className={`board-cell ${props.cellState.state === 'targeted-draw' ? 'targeted-draw' : ''}`}
+      className={`board-cell ${props.cellState.state === TARGETED_DRAW ? 'targeted-draw' : ''}`}
       onClick={cellClicked}
       onKeyPress={cellClicked}
     >
