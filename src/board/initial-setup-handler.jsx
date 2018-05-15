@@ -24,9 +24,11 @@ class InitialSetupHandler {
 
   handleInitialSetup = (targetCell: CellState, currentPlayer: string, board: BoardCells) => {
     const result = {};
+    result.message = '';
     if (!this.initialSetupState[currentPlayer].dukeDrawn) {
       if (targetCell.coordinates.row !== this.initialDukeRow(currentPlayer)) {
-        return false; // return a message that can be displayed to user
+        result.message = `wrong row - please choose the ${currentPlayer === 'white' ? 'top' : 'bottom'} row`;
+        return result;
       }
       if (targetCell.coordinates.row === this.initialDukeRow(currentPlayer)) {
         result.board = update(board, {
@@ -78,8 +80,8 @@ class InitialSetupHandler {
 
       return result;
     }
-    console.log('error');
-    return false;
+    result.message = 'please put footman in highlighted place';
+    return result;
   };
 
   initialDukeRow = (color: string) => (color === 'white' ? 0 : configuration.boardSize.height - 1);

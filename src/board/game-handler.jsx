@@ -11,14 +11,16 @@ type GameHandlerState = {
   board: BoardCells,
   gameStage: string,
   targetedCell: CellState | null,
-  currentPlayer: string
+  currentPlayer: string,
+  message: string
 };
 class GameHandler extends Component<null, GameHandlerState> {
   state = {
     board: generateCells(),
     gameStage: INITIAL_GAME_SETUP,
     targetedCell: null,
-    currentPlayer: 'white'
+    currentPlayer: 'white',
+    message: ''
   };
 
   onCellClicked = (coordinates: Coordinates) => {
@@ -47,6 +49,7 @@ class GameHandler extends Component<null, GameHandlerState> {
 
         <div className="menu-wrapper">
           <header>menu</header>
+          <p>obecna wiadomość: {this.state.message}</p>
           <p>obecny gracz: {this.state.currentPlayer}</p>
           <p>etap: {this.state.gameStage}</p>
         </div>
