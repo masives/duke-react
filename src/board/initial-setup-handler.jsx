@@ -2,7 +2,7 @@
 import update from 'immutability-helper';
 import configuration from '../config/index.json';
 import { GAME_LOOP } from './enums/game-stages';
-import { TARGETED_DRAW } from './enums/cell-status';
+import CELL_STATUS from './enums/cell-status';
 
 class InitialSetupHandler {
   DukeCoordinates: Object & { white: Coordinates | null, black: Coordinates | null } = {
@@ -45,12 +45,12 @@ class InitialSetupHandler {
 
         const adjacentToDuke = this.getAdjacentToDuke(this.DukeCoordinates[currentPlayer]);
         adjacentToDuke.forEach((coordinates: Coordinates) => {
-          result.board[coordinates.row][coordinates.col].state = TARGETED_DRAW;
+          result.board[coordinates.row][coordinates.col].state = CELL_STATUS.TARGETED_DRAW;
         });
         return result;
       }
     }
-    if (this.initialSetupState[currentPlayer].dukeDrawn && targetCell.state === TARGETED_DRAW) {
+    if (this.initialSetupState[currentPlayer].dukeDrawn && targetCell.state === CELL_STATUS.TARGETED_DRAW) {
       result.board = update(board, {
         [targetCell.coordinates.row]: {
           [targetCell.coordinates.col]: {
