@@ -9,7 +9,10 @@ const Cell = (props: { onCellClicked: Function, cellState: CellState }) => {
   };
   return (
     <button
-      className={`board-cell ${props.cellState.state === CELL_STATUS.TARGETED_DRAW ? 'targeted-draw' : ''}`}
+      className={`board-cell 
+      ${props.cellState.state === CELL_STATUS.TARGETED_DRAW ? 'targeted-draw' : ''}
+      ${props.cellState.color === 'white' ? 'white' : ''}
+      ${props.cellState.color === 'black' ? 'black' : ''}`}
       onClick={cellClicked}
       onKeyPress={cellClicked}
     >
