@@ -1,7 +1,7 @@
 // @flow
 import update from 'immutability-helper';
 import configuration from '../config/index.json';
-import { GAME_LOOP } from './enums/game-stages';
+import GAME_STAGES from './enums/game-stages';
 import CELL_STATUS from './enums/cell-status';
 
 class InitialSetupHandler {
@@ -75,7 +75,7 @@ class InitialSetupHandler {
       }
 
       if (this.initialSetupState.black.dukeDrawn && this.initialSetupState[currentPlayer].knightsDrawn === 2) {
-        result.gameStage = GAME_LOOP;
+        result.gameStage = GAME_STAGES.GAME_LOOP;
       }
 
       return result;

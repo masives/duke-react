@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import InitialSetupHandler from './initial-setup-handler';
 import { generateCells } from './helpers';
-import { INITIAL_GAME_SETUP } from './enums/game-stages';
+import GAME_STAGES from './enums/game-stages';
 import BoardComponent from './board-component';
 
 const initialSetupHandler = new InitialSetupHandler();
@@ -17,7 +17,7 @@ type GameHandlerState = {
 class GameHandler extends Component<null, GameHandlerState> {
   state = {
     board: generateCells(),
-    gameStage: INITIAL_GAME_SETUP,
+    gameStage: GAME_STAGES.INITIAL_GAME_SETUP,
     targetedCell: null,
     currentPlayer: 'white',
     message: ''
@@ -29,12 +29,15 @@ class GameHandler extends Component<null, GameHandlerState> {
 
   dispatchClickEvent = () => {
     let result: any;
-    if (this.state.gameStage === INITIAL_GAME_SETUP) {
+    if (this.state.gameStage === GAME_STAGES.INITIAL_GAME_SETUP) {
       result = initialSetupHandler.handleInitialSetup(
         this.state.targetedCell,
         this.state.currentPlayer,
         this.state.board
       );
+    }
+    if (this.state.gameStage === GAME_STAGES.GAME_LOOP) {
+      console.log('handle gameloop click');
     }
     console.log('result', result);
     if (result) {
