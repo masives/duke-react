@@ -24,24 +24,35 @@ class GameHandler extends Component<null, GameHandlerState> {
   };
 
   onCellClicked = (coordinates: Coordinates) => {
-    this.setState({ targetedCell: this.state.board[coordinates.row][coordinates.col] }, this.dispatchClickEvent);
+    this.dispatchClickEvent(coordinates);
   };
 
-  dispatchClickEvent = () => {
+  dispatchClickEvent = (coordinates: Coordinates) => {
     let result: any;
     if (this.state.gameStage === GAME_STAGES.INITIAL_GAME_SETUP) {
-      result = initialSetupHandler.handleInitialSetup(
-        this.state.targetedCell,
-        this.state.currentPlayer,
-        this.state.board
-      );
+      this.setState({ targetedCell: this.state.board[coordinates.row][coordinates.col] }, () => {
+        result = initialSetupHandler.handleInitialSetup(
+          this.state.targetedCell,
+          this.state.currentPlayer,
+          this.state.board
+        );
+        // initial setup handler has to clear selection!
+        this.setState(result);
+      });
     }
     if (this.state.gameStage === GAME_STAGES.GAME_LOOP) {
       console.log('handle gameloop click');
-    }
-    console.log('result', result);
-    if (result) {
-      this.setState(result);
+      // if (!this.state.targetedCell)
+
+      // if not selected and not current player change message to wrong player
+
+      // if not selected and current player set selected Cell mark other cells as targets
+
+      // if selected and targeted cell isn't marked as possible movement clear selection
+
+      // if selected and targeted cell is valid move unit
+
+      // if drawing show possible draw places
     }
   };
 
