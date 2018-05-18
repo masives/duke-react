@@ -76,6 +76,8 @@ class InitialSetupHandler {
 
       if (this.initialSetupState.black.dukeDrawn && this.initialSetupState[currentPlayer].knightsDrawn === 2) {
         result.gameStage = GAME_STAGES.GAME_LOOP;
+        result.targetedCell = null;
+        result.currentPlayer = 'white';
       }
 
       return result;
