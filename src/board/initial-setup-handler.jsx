@@ -14,11 +14,11 @@ class InitialSetupHandler {
   initialSetupState: initialSetupState = {
     white: {
       dukeDrawn: false,
-      knightsDrawn: 0
+      footmanDrawn: 0
     },
     black: {
       dukeDrawn: false,
-      knightsDrawn: 0
+      footmanDrawn: 0
     }
   };
 
@@ -55,15 +55,15 @@ class InitialSetupHandler {
         [targetCell.coordinates.row]: {
           [targetCell.coordinates.col]: {
             color: { $set: currentPlayer },
-            unitType: { $set: 'knight' },
+            unitType: { $set: 'footman' },
             state: { $set: '' }
           }
         }
       });
 
-      this.initialSetupState[currentPlayer].knightsDrawn += 1;
+      this.initialSetupState[currentPlayer].footmanDrawn += 1;
 
-      if (this.initialSetupState[currentPlayer].knightsDrawn === 2) {
+      if (this.initialSetupState[currentPlayer].footmanDrawn === 2) {
         result.currentPlayer = 'black';
 
         // cancel selection, to be extracted
@@ -74,7 +74,7 @@ class InitialSetupHandler {
         });
       }
 
-      if (this.initialSetupState.black.dukeDrawn && this.initialSetupState[currentPlayer].knightsDrawn === 2) {
+      if (this.initialSetupState.black.dukeDrawn && this.initialSetupState[currentPlayer].footmanDrawn === 2) {
         result.gameStage = GAME_STAGES.GAME_LOOP;
         result.targetedCell = null;
         result.currentPlayer = 'white';
