@@ -9,15 +9,14 @@ export type CellState = {
   color: string,
   coordinates: Coordinates,
   unitType: string,
-  polarity: string,
+  startingSide: boolean,
   state: string
 };
 
 // prettier-ignore
 export type BoardCells = Array < Array < CellState >> ;
 
-declare
-var module: {
+declare var module: {
   hot: {
     accept(path: string, callback: () => void): void
   }
@@ -33,10 +32,10 @@ export type GameState = {
 export type initialSetupState = {
   white: Object & {
     dukeDrawn: boolean,
-    knightsDrawn: number
+    footmanDrawn: number
   },
   black: Object & {
     dukeDrawn: boolean,
-    knightsDrawn: number
-  },
-}
+    footmanDrawn: number
+  }
+};
