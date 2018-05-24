@@ -50,13 +50,15 @@ class GameHandler extends Component<null, GameHandlerState> {
         if (clickedCell.color === this.state.currentPlayer) {
           console.log('now show where it can move');
           this.setState({ selectedCell: clickedCell }, () => {
-            getUnitMovement(
+            const targetedCells = getUnitMovement(
               this.state.selectedCell.unitType,
               this.state.selectedCell.startingSide,
               this.state.board,
               this.state.selectedCell.coordinates,
               this.state.currentPlayer
             );
+            console.log('targetedCells', targetedCells);
+            this.setState({ board: targetedCells });
             // getPossibleMovement(UnitType, coordinates): Array<coordinates>
             // elementy arrayki ustawić jako potencjalny ruch
           });
