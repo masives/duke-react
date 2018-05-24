@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import CELL_STATUS from './enums/cell-status';
+// import CELL_STATUS from './enums/cell-status';
 
 const Cell = (props: { onCellClicked: Function, cellState: CellState }) => {
   const cellClicked = () => {
@@ -10,9 +10,8 @@ const Cell = (props: { onCellClicked: Function, cellState: CellState }) => {
   return (
     <button
       className={`board-cell 
-      ${props.cellState.state === CELL_STATUS.TARGETED_DRAW ? 'targeted-draw' : ''}
-      ${props.cellState.color === 'white' ? 'white' : ''}
-      ${props.cellState.color === 'black' ? 'black' : ''}`}
+      ${props.cellState.state}
+      ${props.cellState.color}`}
       onClick={cellClicked}
       onKeyPress={cellClicked}
     >
