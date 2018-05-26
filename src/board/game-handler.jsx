@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import InitialSetupHandler from './initial-setup-handler';
 import { generateCells } from './helpers';
-import { getUnitMovement } from './movement-type';
+import { getUnitMovement } from './movement-handler';
 import GAME_STAGES from './enums/game-stages';
 import BoardComponent from './board-component';
 
@@ -12,7 +12,7 @@ type GameHandlerState = {
   board: BoardCells,
   gameStage: string,
   selectedCell: CellState | null,
-  targetedCell: CellState | null,
+  targetedCell?: CellState | null,
   currentPlayer: string,
   message: string
 };
@@ -50,13 +50,7 @@ class GameHandler extends Component<null, GameHandlerState> {
         if (clickedCell.color === this.state.currentPlayer) {
           console.log('now show where it can move');
           this.setState({ selectedCell: clickedCell }, () => {
-            const targetedCells = getUnitMovement(
-              this.state.selectedCell.unitType,
-              this.state.selectedCell.startingSide,
-              this.state.board,
-              this.state.selectedCell.coordinates,
-              this.state.currentPlayer
-            );
+            const targetedCells = getUnitMovement(this.state.selectedCell, this.state.board, this.state.currentPlayer);
             console.log('targetedCells', targetedCells);
             this.setState({ board: targetedCells });
             // getPossibleMovement(UnitType, coordinates): Array<coordinates>
