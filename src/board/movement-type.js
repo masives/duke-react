@@ -75,18 +75,18 @@ export const getUnitMovement = (
     .filter(coordinates => board[coordinates.row][coordinates.col].color !== currentPlayer);
 
   // create
-  const cellToUpdateAsSelected = {};
-  result.forEach(coordinates =>
-    Object.assign(cellToUpdateAsSelected, {
-      [coordinates.row]: {
+  let cellToUpdateAsSelected = {};
+  result.forEach(coordinates => {
+    cellToUpdateAsSelected = Object.assign({}, cellToUpdateAsSelected, {
+      [coordinates.row]: Object.assign({}, cellToUpdateAsSelected[coordinates.row], {
         [coordinates.col]: {
           state: {
             $set: CELL_STATUS.TARGETED
           }
         }
-      }
-    })
-  );
+      })
+    });
+  });
 
   return update(board, cellToUpdateAsSelected);
 };
