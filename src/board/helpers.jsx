@@ -22,6 +22,3 @@ export const generateCells = () => {
   }
   return Cells;
 };
-
-export const isInBounds = (coordinates: Coordinates) =>
-  coordinates.row >= 0 && coordinates.row < 6 && coordinates.col >= 0 && coordinates.col < 6;

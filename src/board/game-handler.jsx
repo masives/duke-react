@@ -1,9 +1,11 @@
 // @flow
 import React, { Component } from 'react';
+import update from 'immutability-helper';
 import InitialSetupHandler from './initial-setup-handler';
 import { generateCells } from './helpers';
-import { getUnitMovement } from './movement-handler';
+import { updateBoardWithTargetedCells } from './selection-handler';
 import GAME_STAGES from './enums/game-stages';
+import CELL_STATUS from './enums/cell-status';
 import BoardComponent from './board-component';
 
 const initialSetupHandler = new InitialSetupHandler();
@@ -45,18 +47,34 @@ class GameHandler extends Component<null, GameHandlerState> {
       });
     }
     if (this.state.gameStage === GAME_STAGES.GAME_LOOP) {
-      console.log('handle gameloop click');
       if (!this.state.selectedCell) {
         if (clickedCell.color === this.state.currentPlayer) {
-          console.log('now show where it can move');
           this.setState({ selectedCell: clickedCell }, () => {
-            const targetedCells = getUnitMovement(this.state.selectedCell, this.state.board, this.state.currentPlayer);
-            console.log('targetedCells', targetedCells);
+            const targetedCells = updateBoardWithTargetedCells(
+              this.state.selectedCell,
+              this.state.board,
+              this.state.currentPlayer
+            );
             this.setState({ board: targetedCells });
-            // getPossibleMovement(UnitType, coordinates): Array<coordinates>
-            // elementy arrayki ustawić jako potencjalny ruch
           });
         }
+      }
+      if (clickedCell.state === CELL_STATUS.TARGETED) {
+        console.log('move it');
+
+        // copy state of selected cell to clickedCell
+        const copySelectedCell = update(this.state.board, {
+          [clickedCell.coordinates.row]: {
+            [clickedCell.coordinates.col]: {
+              color: { $set: this.state.currentPlayer },
+              unitType: { $set: clickedCell.unitType }
+            }
+          }
+        });
+
+        this.setState({ board: copySelectedCell });
+        // empty state of selectedCell
+        // change player
       }
       console.log('click on your unit');
     }
