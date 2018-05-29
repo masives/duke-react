@@ -1,11 +1,13 @@
 const TARGETED = 'TARGETED';
 const SELECTED = 'SELECTED';
 const TARGETED_DRAW = 'TARGETED_DRAW';
+const NONE = '';
 
 const CELL_STATUS = {
   TARGETED,
   SELECTED,
-  TARGETED_DRAW
+  TARGETED_DRAW,
+  NONE
 };
 
 export default CELL_STATUS;

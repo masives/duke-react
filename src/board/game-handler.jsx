@@ -1,9 +1,9 @@
 // @flow
 import React, { Component } from 'react';
-import update from 'immutability-helper';
 import InitialSetupHandler from './initial-setup-handler';
 import { generateCells } from './helpers';
 import { updateBoardWithTargetedCells } from './selection-handler';
+import handleMovement from './movement-handler';
 import GAME_STAGES from './enums/game-stages';
 import CELL_STATUS from './enums/cell-status';
 import BoardComponent from './board-component';
@@ -63,16 +63,9 @@ class GameHandler extends Component<null, GameHandlerState> {
         console.log('move it');
 
         // copy state of selected cell to clickedCell
-        const copySelectedCell = update(this.state.board, {
-          [clickedCell.coordinates.row]: {
-            [clickedCell.coordinates.col]: {
-              color: { $set: this.state.currentPlayer },
-              unitType: { $set: clickedCell.unitType }
-            }
-          }
-        });
+        const boardAfterMove = handleMovement(this.state.board, clickedCell, this.state.selectedCell);
 
-        this.setState({ board: copySelectedCell });
+        this.setState({ board: boardAfterMove });
         // empty state of selectedCell
         // change player
       }
