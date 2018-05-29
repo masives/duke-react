@@ -19,8 +19,8 @@ const getMoveTypeMovement = (absoluteUnitMovement, selectedCellCoordinates, boar
 const getSlideTypeMovement = (absoluteUnitMovement, selectedCellCoordinates, board, currentPlayer) => {
   const slideMovement = [];
   if (absoluteUnitMovement.slide === 'horizontal') {
-    let checkedLeftIndex = 1;
-    const checkLeft = () => {
+    const checkLeft = (index = 1) => {
+      let checkedLeftIndex = index;
       if (
         selectedCellCoordinates.col - checkedLeftIndex >= 0 &&
         checkFriendlyCollision(
@@ -33,21 +33,24 @@ const getSlideTypeMovement = (absoluteUnitMovement, selectedCellCoordinates, boa
           col: selectedCellCoordinates.col - checkedLeftIndex
         });
         checkedLeftIndex += 1;
-        checkLeft();
+        checkLeft(checkedLeftIndex);
       }
     };
-    let checkedRightIndex = 1;
-    const checkRight = () => {
+    const checkRight = (index = 1) => {
+      let checkedRightIndex = index;
       if (
         selectedCellCoordinates.col + checkedRightIndex < 6 && // tu ma być szerokośc z configa
-        board[selectedCellCoordinates.row][selectedCellCoordinates.col + checkedRightIndex].color !== currentPlayer
+        checkFriendlyCollision(
+          board[selectedCellCoordinates.row][selectedCellCoordinates.col + checkedRightIndex],
+          currentPlayer
+        )
       ) {
         slideMovement.push({
           row: selectedCellCoordinates.row,
           col: selectedCellCoordinates.col + checkedRightIndex
         });
         checkedRightIndex += 1;
-        checkRight();
+        checkRight(checkedRightIndex);
       }
     };
     checkLeft();
