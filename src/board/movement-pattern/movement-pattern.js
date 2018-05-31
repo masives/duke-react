@@ -56,6 +56,44 @@ const getSlideTypeMovement = (absoluteUnitMovement, selectedCellCoordinates, boa
     checkLeft();
     checkRight();
   }
+  if (absoluteUnitMovement.slide === 'vertical') {
+    const checkTop = (index = 1) => {
+      let checkedTopIndex = index;
+      if (
+        selectedCellCoordinates.row - checkedTopIndex >= 0 &&
+        checkFriendlyCollision(
+          board[selectedCellCoordinates.row - checkedTopIndex][selectedCellCoordinates.col],
+          currentPlayer
+        )
+      ) {
+        slideMovement.push({
+          row: selectedCellCoordinates.row - checkedTopIndex,
+          col: selectedCellCoordinates.col
+        });
+        checkedTopIndex += 1;
+        checkTop(checkedTopIndex);
+      }
+    };
+    const checkBottom = (index = 1) => {
+      let checkedBottomIndex = index;
+      if (
+        selectedCellCoordinates.row + checkedBottomIndex < 6 &&
+        checkFriendlyCollision(
+          board[selectedCellCoordinates.row + checkedBottomIndex][selectedCellCoordinates.col],
+          currentPlayer
+        )
+      ) {
+        slideMovement.push({
+          row: selectedCellCoordinates.row + checkedBottomIndex,
+          col: selectedCellCoordinates.col
+        });
+        checkedBottomIndex += 1;
+        checkBottom(checkedBottomIndex);
+      }
+    };
+    checkTop();
+    checkBottom();
+  }
   return slideMovement;
 };
 
