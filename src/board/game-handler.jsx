@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import InitialSetupHandler from './initial-setup-handler';
-import { generateCells } from './helpers';
+import { generateCells, changeCurrentPlayer } from './helpers';
 import { updateBoardWithTargetedCells } from './selection-handler';
 import handleMovement from './movement-handler';
 import GAME_STAGES from './enums/game-stages';
@@ -42,7 +42,6 @@ class GameHandler extends Component<null, GameHandlerState> {
           this.state.currentPlayer,
           this.state.board
         );
-        // initial setup handler has to clear selection!
         this.setState(result);
       });
     }
@@ -64,8 +63,12 @@ class GameHandler extends Component<null, GameHandlerState> {
 
         // copy state of selected cell to clickedCell
         const boardAfterMove = handleMovement(this.state.board, clickedCell, this.state.selectedCell);
-
-        this.setState({ board: boardAfterMove });
+        const nextPlayer = changeCurrentPlayer(this.state.currentPlayer);
+        this.setState({
+          board: boardAfterMove,
+          currentPlayer: nextPlayer,
+          selectedCell: null
+        });
         // empty state of selectedCell
         // change player
       }
