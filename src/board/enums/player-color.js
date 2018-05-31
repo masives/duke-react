@@ -1,5 +1,5 @@
-const BLACK = 'BLACK';
-const WHITE = 'BLACK';
+const BLACK = 'black';
+const WHITE = 'white';
 const NONE = '';
 
 const PLAYER_COLOR = {

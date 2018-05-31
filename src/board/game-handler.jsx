@@ -6,6 +6,7 @@ import { updateBoardWithTargetedCells } from './selection-handler';
 import handleMovement from './movement-handler';
 import GAME_STAGES from './enums/game-stages';
 import CELL_STATUS from './enums/cell-status';
+import PLAYER_COLOR from './enums/player-color';
 import BoardComponent from './board-component';
 
 const initialSetupHandler = new InitialSetupHandler();
@@ -24,7 +25,7 @@ class GameHandler extends Component<null, GameHandlerState> {
     gameStage: GAME_STAGES.INITIAL_GAME_SETUP,
     selectedCell: null,
     targetedCell: null,
-    currentPlayer: 'white',
+    currentPlayer: PLAYER_COLOR.WHITE,
     message: ''
   };
 

@@ -3,6 +3,7 @@
 import update from 'immutability-helper';
 import configuration from '../config/index.json';
 import CELL_STATUS from './enums/cell-status';
+import PLAYER_COLOR from './enums/player-color';
 
 export const generateCells = () => {
   const Cells: BoardCells = new Array(configuration.boardSize.width);
@@ -52,4 +53,5 @@ export const emptySelection = (board: BoardCells) => {
   return boardWithClearedSelection;
 };
 
-export const changeCurrentPlayer = (currentPlayer: PlayerColor) => (currentPlayer === 'white' ? 'black' : 'white');
+export const changeCurrentPlayer = currentPlayer =>
+  currentPlayer === PLAYER_COLOR.WHITE ? PLAYER_COLOR.BLACK : PLAYER_COLOR.WHITE;
