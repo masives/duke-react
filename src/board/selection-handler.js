@@ -9,12 +9,11 @@ export const updateBoardWithTargetedCells = (selectedCell: CellState, board: Boa
 
   const relativeTargettedCells = getUnitMovementPattern(startingSide, unitType, coordinates, board, currentPlayer);
 
-  // create selected board array that will be used to update current board
   let cellToUpdateAsTargeted = {};
-  relativeTargettedCells.forEach(currentCoordinates => {
+  relativeTargettedCells.forEach(targetedCoordinates => {
     cellToUpdateAsTargeted = Object.assign({}, cellToUpdateAsTargeted, {
-      [currentCoordinates.row]: Object.assign({}, cellToUpdateAsTargeted[coordinates.row], {
-        [currentCoordinates.col]: {
+      [targetedCoordinates.row]: Object.assign({}, cellToUpdateAsTargeted[targetedCoordinates.row], {
+        [targetedCoordinates.col]: {
           state: {
             $set: CELL_STATUS.TARGETED
           }
