@@ -17,14 +17,6 @@ $width: 6;
   border: 1px solid #ccc;
 }
 
-.TARGETED_DRAW {
-  background-color: #77c;
-}
-
-.TARGETED {
-  background-color: #900;
-}
-
 .white {
   background-color: #aaa;
 }
@@ -32,4 +24,12 @@ $width: 6;
 .black {
   background-color: #111;
   color: #aaa;
+}
+
+.TARGETED_DRAW {
+  background-color: #77c;
+}
+
+.TARGETED {
+  background-color: #900;
 }
