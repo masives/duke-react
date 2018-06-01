@@ -15,7 +15,6 @@ type GameHandlerState = {
   board: BoardCells,
   gameStage: string,
   selectedCell: CellState | null,
-  targetedCell?: CellState | null,
   currentPlayer: string,
   message: string
 };
@@ -34,9 +33,12 @@ class GameHandler extends Component<null, GameHandlerState> {
 
   dispatchClickEvent = (coordinates: Coordinates) => {
     const clickedCell: CellState = this.state.board[coordinates.row][coordinates.col];
-    let result: any;
     if (this.state.gameStage === GAME_STAGES.INITIAL_GAME_SETUP) {
-      result = initialSetupHandler.handleInitialSetup(clickedCell, this.state.currentPlayer, this.state.board);
+      const result: any = initialSetupHandler.handleInitialSetup(
+        clickedCell,
+        this.state.currentPlayer,
+        this.state.board
+      );
       this.setState(result);
     }
     if (this.state.gameStage === GAME_STAGES.GAME_LOOP) {
