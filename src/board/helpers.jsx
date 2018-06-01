@@ -72,3 +72,9 @@ export const getAdjacentToDuke = (dukeCoordinates: Coordinates) => {
   }
   return result;
 };
+
+export const updateDukeCoordinates = (
+  dukeCoordinates: DukeCoordinates,
+  currentPlayer: string,
+  newCoordinates: Coordinates
+) => update(dukeCoordinates, { [currentPlayer]: { $set: newCoordinates } });

@@ -39,3 +39,8 @@ export type initialSetupState = {
     footmanDrawn: number
   }
 };
+
+export type DukeCoordinates = Object & {
+  white: Coordinates,
+  black: Coordinates
+};

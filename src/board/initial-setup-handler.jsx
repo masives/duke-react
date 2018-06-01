@@ -1,6 +1,6 @@
 // @flow
 import configuration from '../config/index.json';
-import { emptySelection, changeCurrentPlayer, getAdjacentToDuke } from './helpers';
+import { emptySelection, changeCurrentPlayer, getAdjacentToDuke, updateDukeCoordinates } from './helpers';
 import { setUnit } from './draw/draw';
 import GAME_STAGES from './enums/game-stages';
 import CELL_STATUS from './enums/cell-status';
@@ -24,7 +24,7 @@ class InitialSetupHandler {
     }
   };
 
-  handleInitialSetup = (targetCell: CellState, currentPlayer: string, board: BoardCells) => {
+  handleInitialSetup = (targetCell: CellState, currentPlayer: string, board: BoardCells, dukeCoordinates) => {
     const result = {};
     result.message = '';
     if (!this.initialSetupState[currentPlayer].dukeDrawn) {
@@ -34,6 +34,7 @@ class InitialSetupHandler {
       }
       if (targetCell.coordinates.row === this.initialDukeRow(currentPlayer)) {
         result.board = setUnit(board, targetCell.coordinates, 'duke', currentPlayer);
+        result.dukeCoordinates = updateDukeCoordinates(dukeCoordinates, currentPlayer, targetCell.coordinates);
 
         this.initialSetupState[currentPlayer].dukeDrawn = true;
         this.DukeCoordinates[currentPlayer] = targetCell.coordinates;

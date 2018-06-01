@@ -1,7 +1,8 @@
 // @flow
 import React, { Component } from 'react';
+// import update from 'immutability-helper';
 import InitialSetupHandler from './initial-setup-handler';
-import { generateCells, changeCurrentPlayer } from './helpers';
+import { generateCells, changeCurrentPlayer, updateDukeCoordinates } from './helpers';
 import { updateBoardWithTargetedCells } from './selection-handler';
 import handleMovement from './movement-handler';
 import GAME_STAGES from './enums/game-stages';
@@ -16,7 +17,8 @@ type GameHandlerState = {
   gameStage: string,
   selectedCell: CellState | null,
   currentPlayer: string,
-  message: string
+  message: string,
+  dukeCoordinates?: DukeCoordinates
 };
 class GameHandler extends Component<null, GameHandlerState> {
   state = {
@@ -24,7 +26,17 @@ class GameHandler extends Component<null, GameHandlerState> {
     gameStage: GAME_STAGES.INITIAL_GAME_SETUP,
     selectedCell: null,
     currentPlayer: PLAYER_COLOR.WHITE,
-    message: ''
+    message: '',
+    dukeCoordinates: {
+      white: {
+        row: 0,
+        col: 0
+      },
+      black: {
+        row: 0,
+        col: 0
+      }
+    }
   };
 
   onCellClicked = (coordinates: Coordinates) => {
@@ -37,7 +49,8 @@ class GameHandler extends Component<null, GameHandlerState> {
       const result: any = initialSetupHandler.handleInitialSetup(
         clickedCell,
         this.state.currentPlayer,
-        this.state.board
+        this.state.board,
+        this.state.dukeCoordinates
       );
       this.setState(result);
     }
@@ -51,13 +64,25 @@ class GameHandler extends Component<null, GameHandlerState> {
       if (clickedCell.state === CELL_STATUS.TARGETED) {
         // move unit
         const boardAfterMove = handleMovement(this.state.board, clickedCell, this.state.selectedCell);
+
         const nextPlayer = changeCurrentPlayer(this.state.currentPlayer);
+
         this.setState({
           board: boardAfterMove,
           currentPlayer: nextPlayer,
           selectedCell: null
-          // duke position should be updated (coordinates)
         });
+
+        // update duke if needed
+        if (this.state.selectedCell.unitType === 'duke') {
+          this.setState({
+            dukeCoordinates: updateDukeCoordinates(
+              this.state.dukeCoordinates,
+              this.state.currentPlayer,
+              clickedCell.coordinates
+            )
+          });
+        }
       }
       console.log('click on your unit');
     }
