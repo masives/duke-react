@@ -53,5 +53,22 @@ export const emptySelection = (board: BoardCells) => {
   return boardWithClearedSelection;
 };
 
-export const changeCurrentPlayer = currentPlayer =>
+export const changeCurrentPlayer = (currentPlayer: string) =>
   currentPlayer === PLAYER_COLOR.WHITE ? PLAYER_COLOR.BLACK : PLAYER_COLOR.WHITE;
+
+export const getAdjacentToDuke = (dukeCoordinates: Coordinates) => {
+  const result: Array<Coordinates> = [];
+  if (dukeCoordinates.col - 1 >= 0) {
+    result.push({ col: dukeCoordinates.col - 1, row: dukeCoordinates.row });
+  }
+  if (dukeCoordinates.col + 1 < configuration.boardSize.height) {
+    result.push({ col: dukeCoordinates.col + 1, row: dukeCoordinates.row });
+  }
+  if (dukeCoordinates.row - 1 >= 0) {
+    result.push({ col: dukeCoordinates.col, row: dukeCoordinates.row - 1 });
+  }
+  if (dukeCoordinates.row + 1 < configuration.boardSize.width) {
+    result.push({ col: dukeCoordinates.col, row: dukeCoordinates.row + 1 });
+  }
+  return result;
+};
