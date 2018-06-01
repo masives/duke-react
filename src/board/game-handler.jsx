@@ -24,7 +24,6 @@ class GameHandler extends Component<null, GameHandlerState> {
     board: generateCells(),
     gameStage: GAME_STAGES.INITIAL_GAME_SETUP,
     selectedCell: null,
-    targetedCell: null,
     currentPlayer: PLAYER_COLOR.WHITE,
     message: ''
   };
@@ -37,41 +36,26 @@ class GameHandler extends Component<null, GameHandlerState> {
     const clickedCell: CellState = this.state.board[coordinates.row][coordinates.col];
     let result: any;
     if (this.state.gameStage === GAME_STAGES.INITIAL_GAME_SETUP) {
-      this.setState({ targetedCell: clickedCell }, () => {
-        result = initialSetupHandler.handleInitialSetup(
-          this.state.targetedCell,
-          this.state.currentPlayer,
-          this.state.board
-        );
-        this.setState(result);
-      });
+      result = initialSetupHandler.handleInitialSetup(clickedCell, this.state.currentPlayer, this.state.board);
+      this.setState(result);
     }
     if (this.state.gameStage === GAME_STAGES.GAME_LOOP) {
       if (!this.state.selectedCell) {
         if (clickedCell.color === this.state.currentPlayer) {
-          this.setState({ selectedCell: clickedCell }, () => {
-            const targetedCells = updateBoardWithTargetedCells(
-              this.state.selectedCell,
-              this.state.board,
-              this.state.currentPlayer
-            );
-            this.setState({ board: targetedCells });
-          });
+          const targetedCells = updateBoardWithTargetedCells(clickedCell, this.state.board, this.state.currentPlayer);
+          this.setState({ board: targetedCells, selectedCell: clickedCell });
         }
       }
       if (clickedCell.state === CELL_STATUS.TARGETED) {
-        console.log('move it');
-
-        // copy state of selected cell to clickedCell
+        // move unit
         const boardAfterMove = handleMovement(this.state.board, clickedCell, this.state.selectedCell);
         const nextPlayer = changeCurrentPlayer(this.state.currentPlayer);
         this.setState({
           board: boardAfterMove,
           currentPlayer: nextPlayer,
           selectedCell: null
+          // duke position should be updated (coordinates)
         });
-        // empty state of selectedCell
-        // change player
       }
       console.log('click on your unit');
     }
