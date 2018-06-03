@@ -5,6 +5,11 @@ import { isInBounds } from './movement-pattern-helpers';
 
 const checkFriendlyCollision = (cell: CellState, currentPlayer: string) => cell.color !== currentPlayer;
 
+const checkCollision = (cell: CellState, currentPlayer: string) => ({
+  friendly: cell.color === currentPlayer,
+  enemy: cell.color !== currentPlayer && cell.color !== ''
+});
+
 const getMoveTypeMovement = (absoluteUnitMovement, selectedCellCoordinates, board, currentPlayer) =>
   absoluteUnitMovement.move
     .map((targetedCoordinates: Coordinates) => ({
@@ -19,19 +24,22 @@ const getMoveTypeMovement = (absoluteUnitMovement, selectedCellCoordinates, boar
 const getSlideTypeMovement = (absoluteUnitMovement, selectedCellCoordinates, board, currentPlayer) => {
   const slideMovement = [];
   if (absoluteUnitMovement.slide === 'horizontal') {
+    const checkedRow = board[selectedCellCoordinates.row];
     const checkLeft = (index = 1) => {
       let checkedLeftIndex = index;
-      if (
-        selectedCellCoordinates.col - checkedLeftIndex >= 0 &&
-        checkFriendlyCollision(
-          board[selectedCellCoordinates.row][selectedCellCoordinates.col - checkedLeftIndex],
-          currentPlayer
-        )
-      ) {
+      const checkedColumn = selectedCellCoordinates.col - checkedLeftIndex;
+      if (checkedColumn >= 0) {
+        const colission = checkCollision(checkedRow[checkedColumn], currentPlayer);
+        if (colission.friendly) {
+          return;
+        }
         slideMovement.push({
           row: selectedCellCoordinates.row,
-          col: selectedCellCoordinates.col - checkedLeftIndex
+          col: checkedColumn
         });
+        if (colission.enemy) {
+          return;
+        }
         checkedLeftIndex += 1;
         checkLeft(checkedLeftIndex);
       }
@@ -40,10 +48,7 @@ const getSlideTypeMovement = (absoluteUnitMovement, selectedCellCoordinates, boa
       let checkedRightIndex = index;
       if (
         selectedCellCoordinates.col + checkedRightIndex < 6 && // tu ma być szerokośc z configa
-        checkFriendlyCollision(
-          board[selectedCellCoordinates.row][selectedCellCoordinates.col + checkedRightIndex],
-          currentPlayer
-        )
+        checkFriendlyCollision(checkedRow[selectedCellCoordinates.col + checkedRightIndex], currentPlayer)
       ) {
         slideMovement.push({
           row: selectedCellCoordinates.row,
