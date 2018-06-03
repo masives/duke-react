@@ -26,8 +26,8 @@ const getSlideTypeMovement = (absoluteUnitMovement, selectedCellCoordinates, boa
   if (absoluteUnitMovement.slide === 'horizontal') {
     const checkedRow = board[selectedCellCoordinates.row];
     const checkLeft = (index = 1) => {
-      let checkedLeftIndex = index;
-      const checkedColumn = selectedCellCoordinates.col - checkedLeftIndex;
+      let checkedIndex = index;
+      const checkedColumn = selectedCellCoordinates.col - checkedIndex;
       if (checkedColumn >= 0) {
         const colission = checkCollision(checkedRow[checkedColumn], currentPlayer);
         if (colission.friendly) {
@@ -40,22 +40,27 @@ const getSlideTypeMovement = (absoluteUnitMovement, selectedCellCoordinates, boa
         if (colission.enemy) {
           return;
         }
-        checkedLeftIndex += 1;
-        checkLeft(checkedLeftIndex);
+        checkedIndex += 1;
+        checkLeft(checkedIndex);
       }
     };
     const checkRight = (index = 1) => {
-      let checkedRightIndex = index;
-      if (
-        selectedCellCoordinates.col + checkedRightIndex < 6 && // tu ma być szerokośc z configa
-        checkFriendlyCollision(checkedRow[selectedCellCoordinates.col + checkedRightIndex], currentPlayer)
-      ) {
+      let checkedIndex = index;
+      const checkedColumn = selectedCellCoordinates.col + checkedIndex;
+      if (checkedColumn < 6) {
+        const colission = checkCollision(checkedRow[checkedColumn], currentPlayer);
+        if (colission.friendly) {
+          return;
+        }
         slideMovement.push({
           row: selectedCellCoordinates.row,
-          col: selectedCellCoordinates.col + checkedRightIndex
+          col: checkedColumn
         });
-        checkedRightIndex += 1;
-        checkRight(checkedRightIndex);
+        if (colission.enemy) {
+          return;
+        }
+        checkedIndex += 1;
+        checkRight(checkedIndex);
       }
     };
     checkLeft();
@@ -63,37 +68,42 @@ const getSlideTypeMovement = (absoluteUnitMovement, selectedCellCoordinates, boa
   }
   if (absoluteUnitMovement.slide === 'vertical') {
     const checkTop = (index = 1) => {
-      let checkedTopIndex = index;
-      if (
-        selectedCellCoordinates.row - checkedTopIndex >= 0 &&
-        checkFriendlyCollision(
-          board[selectedCellCoordinates.row - checkedTopIndex][selectedCellCoordinates.col],
-          currentPlayer
-        )
-      ) {
+      let checkedIndex = index;
+      const checkedRow = selectedCellCoordinates.row - checkedIndex;
+      if (checkedRow >= 0) {
+        const colission = checkCollision(board[checkedRow][selectedCellCoordinates.col], currentPlayer);
+        if (colission.friendly) {
+          return;
+        }
         slideMovement.push({
-          row: selectedCellCoordinates.row - checkedTopIndex,
+          row: checkedRow,
           col: selectedCellCoordinates.col
         });
-        checkedTopIndex += 1;
-        checkTop(checkedTopIndex);
+        if (colission.enemy) {
+          return;
+        }
+        checkedIndex += 1;
+        checkTop(checkedIndex);
       }
     };
+
     const checkBottom = (index = 1) => {
-      let checkedBottomIndex = index;
-      if (
-        selectedCellCoordinates.row + checkedBottomIndex < 6 &&
-        checkFriendlyCollision(
-          board[selectedCellCoordinates.row + checkedBottomIndex][selectedCellCoordinates.col],
-          currentPlayer
-        )
-      ) {
+      let checkedIndex = index;
+      const checkedRow = selectedCellCoordinates.row + checkedIndex;
+      if (checkedRow < 6) {
+        const colission = checkCollision(board[checkedRow][selectedCellCoordinates.col], currentPlayer);
+        if (colission.friendly) {
+          return;
+        }
         slideMovement.push({
-          row: selectedCellCoordinates.row + checkedBottomIndex,
+          row: checkedRow,
           col: selectedCellCoordinates.col
         });
-        checkedBottomIndex += 1;
-        checkBottom(checkedBottomIndex);
+        if (colission.enemy) {
+          return;
+        }
+        checkedIndex += 1;
+        checkBottom(checkedIndex);
       }
     };
     checkTop();
