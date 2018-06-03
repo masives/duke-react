@@ -24,7 +24,12 @@ class InitialSetupHandler {
     }
   };
 
-  handleInitialSetup = (targetCell: CellState, currentPlayer: string, board: BoardCells, dukeCoordinates) => {
+  handleInitialSetup = (
+    targetCell: CellState,
+    currentPlayer: string,
+    board: BoardCells,
+    dukeCoordinates: DukeCoordinates
+  ) => {
     const result = {};
     result.message = '';
     if (!this.initialSetupState[currentPlayer].dukeDrawn) {
