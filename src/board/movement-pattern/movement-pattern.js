@@ -33,10 +33,7 @@ const getSlideTypeMovement = (absoluteUnitMovement, selectedCellCoordinates, boa
         if (colission.friendly) {
           return;
         }
-        slideMovement.push({
-          row: selectedCellCoordinates.row,
-          col: checkedColumn
-        });
+        slideMovement.push(checkedRow[checkedColumn].coordinates);
         if (colission.enemy) {
           return;
         }
@@ -52,10 +49,7 @@ const getSlideTypeMovement = (absoluteUnitMovement, selectedCellCoordinates, boa
         if (colission.friendly) {
           return;
         }
-        slideMovement.push({
-          row: selectedCellCoordinates.row,
-          col: checkedColumn
-        });
+        slideMovement.push(checkedRow[checkedColumn].coordinates);
         if (colission.enemy) {
           return;
         }
@@ -71,14 +65,12 @@ const getSlideTypeMovement = (absoluteUnitMovement, selectedCellCoordinates, boa
       let checkedIndex = index;
       const checkedRow = selectedCellCoordinates.row - checkedIndex;
       if (checkedRow >= 0) {
-        const colission = checkCollision(board[checkedRow][selectedCellCoordinates.col], currentPlayer);
+        const checkedCell = board[checkedRow][selectedCellCoordinates.col];
+        const colission = checkCollision(checkedCell, currentPlayer);
         if (colission.friendly) {
           return;
         }
-        slideMovement.push({
-          row: checkedRow,
-          col: selectedCellCoordinates.col
-        });
+        slideMovement.push(checkedCell.coordinates);
         if (colission.enemy) {
           return;
         }
@@ -91,14 +83,12 @@ const getSlideTypeMovement = (absoluteUnitMovement, selectedCellCoordinates, boa
       let checkedIndex = index;
       const checkedRow = selectedCellCoordinates.row + checkedIndex;
       if (checkedRow < 6) {
-        const colission = checkCollision(board[checkedRow][selectedCellCoordinates.col], currentPlayer);
+        const checkedCell = board[checkedRow][selectedCellCoordinates.col];
+        const colission = checkCollision(checkedCell, currentPlayer);
         if (colission.friendly) {
           return;
         }
-        slideMovement.push({
-          row: checkedRow,
-          col: selectedCellCoordinates.col
-        });
+        slideMovement.push(checkedCell.coordinates);
         if (colission.enemy) {
           return;
         }
