@@ -7,6 +7,7 @@
     "build": "webpack",
     "watch": "webpack --watch",
     "test": "jest",
+    "test:watch": "jest --watch",
     "format": "prettier --write --single-quote --print-width=120 --parser=flow --tab-width=2 \"js/**/*.{js,jsx}\"",
     "lint": "eslint **/*.{js,jsx} --quiet",
     "flow:update-types": "flow-typed install"
