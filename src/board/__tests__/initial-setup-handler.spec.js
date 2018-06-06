@@ -8,6 +8,7 @@ import DukeCoordinatesEmpty from './test-helpers/duke-coordinates/empty.json';
 import dukeCoordinatesAfterInitialSetup from './test-helpers/duke-coordinates/dukeCoordinatesInitialRows.json';
 import initialSetupStateAfterWhiteSetup from './test-helpers/initial-setup-state/afterWhiteSetup.json';
 import initialSetupStateAfterWhiteDukeSetup from './test-helpers/initial-setup-state/afterWhiteDukeSetup.json';
+import initialSetupStateAfterFirstWhiteKnight from './test-helpers/initial-setup-state/afterWhiteFirstWhiteKnight.json';
 import CELL_STATUS from '../enums/cell-status';
 
 test('Should initialize correctly', () => {
@@ -165,4 +166,35 @@ test('should return board with first knight [white]', () => {
     })
   );
   expect(initialSetupHandler.initialSetupState[currentPlayer].footmanDrawn).toEqual(1);
+});
+
+test('should return board with second knight [white]', () => {
+  const initialSetupHandler = new InitialSetupHandler();
+  initialSetupHandler.initialSetupState = initialSetupStateAfterFirstWhiteKnight;
+  const currentPlayer = PLAYER_COLOR.WHITE;
+  const validWhiteKnightTargetCell: CellState = {
+    coordinates: {
+      row: 0,
+      col: 3
+    },
+    color: '',
+    unitType: '',
+    startingSide: true,
+    state: CELL_STATUS.TARGETED_DRAW
+  };
+
+  const result = initialSetupHandler.handleInitialSetup(
+    validWhiteKnightTargetCell,
+    currentPlayer,
+    boardAfterWhiteDukeSetup,
+    dukeCoordinatesAfterInitialSetup
+  );
+  expect(result.board[validWhiteKnightTargetCell.coordinates.row][validWhiteKnightTargetCell.coordinates.col]).toEqual(
+    expect.objectContaining({
+      color: currentPlayer,
+      unitType: 'footman'
+    })
+  );
+  expect(initialSetupHandler.initialSetupState[currentPlayer].footmanDrawn).toEqual(2);
+  expect(result.currentPlayer).toEqual('black');
 });
