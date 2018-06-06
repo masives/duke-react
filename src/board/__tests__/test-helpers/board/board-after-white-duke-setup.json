@@ -1,0 +1,374 @@
+[
+  [
+    {
+      "coordinates": {
+        "row": 0,
+        "col": 0
+      },
+      "color": "",
+      "unitType": "",
+      "startingSide": true,
+      "state": ""
+    },
+    {
+      "coordinates": {
+        "row": 0,
+        "col": 1
+      },
+      "color": "",
+      "unitType": "",
+      "startingSide": true,
+      "state": ""
+    },
+    {
+      "coordinates": {
+        "row": 0,
+        "col": 2
+      },
+      "color": "white",
+      "unitType": "duke",
+      "startingSide": true,
+      "state": ""
+    },
+    {
+      "coordinates": {
+        "row": 0,
+        "col": 3
+      },
+      "color": "",
+      "unitType": "",
+      "startingSide": true,
+      "state": ""
+    },
+    {
+      "coordinates": {
+        "row": 0,
+        "col": 4
+      },
+      "color": "",
+      "unitType": "",
+      "startingSide": true,
+      "state": ""
+    },
+    {
+      "coordinates": {
+        "row": 0,
+        "col": 5
+      },
+      "color": "",
+      "unitType": "",
+      "startingSide": true,
+      "state": ""
+    }
+  ],
+  [
+    {
+      "coordinates": {
+        "row": 1,
+        "col": 0
+      },
+      "color": "",
+      "unitType": "",
+      "startingSide": true,
+      "state": ""
+    },
+    {
+      "coordinates": {
+        "row": 1,
+        "col": 1
+      },
+      "color": "",
+      "unitType": "",
+      "startingSide": true,
+      "state": ""
+    },
+    {
+      "coordinates": {
+        "row": 1,
+        "col": 2
+      },
+      "color": "",
+      "unitType": "",
+      "startingSide": true,
+      "state": ""
+    },
+    {
+      "coordinates": {
+        "row": 1,
+        "col": 3
+      },
+      "color": "",
+      "unitType": "",
+      "startingSide": true,
+      "state": ""
+    },
+    {
+      "coordinates": {
+        "row": 1,
+        "col": 4
+      },
+      "color": "",
+      "unitType": "",
+      "startingSide": true,
+      "state": ""
+    },
+    {
+      "coordinates": {
+        "row": 1,
+        "col": 5
+      },
+      "color": "",
+      "unitType": "",
+      "startingSide": true,
+      "state": ""
+    }
+  ],
+  [
+    {
+      "coordinates": {
+        "row": 2,
+        "col": 0
+      },
+      "color": "",
+      "unitType": "",
+      "startingSide": true,
+      "state": ""
+    },
+    {
+      "coordinates": {
+        "row": 2,
+        "col": 1
+      },
+      "color": "",
+      "unitType": "",
+      "startingSide": true,
+      "state": ""
+    },
+    {
+      "coordinates": {
+        "row": 2,
+        "col": 2
+      },
+      "color": "",
+      "unitType": "",
+      "startingSide": true,
+      "state": ""
+    },
+    {
+      "coordinates": {
+        "row": 2,
+        "col": 3
+      },
+      "color": "",
+      "unitType": "",
+      "startingSide": true,
+      "state": ""
+    },
+    {
+      "coordinates": {
+        "row": 2,
+        "col": 4
+      },
+      "color": "",
+      "unitType": "",
+      "startingSide": true,
+      "state": ""
+    },
+    {
+      "coordinates": {
+        "row": 2,
+        "col": 5
+      },
+      "color": "",
+      "unitType": "",
+      "startingSide": true,
+      "state": ""
+    }
+  ],
+  [
+    {
+      "coordinates": {
+        "row": 3,
+        "col": 0
+      },
+      "color": "",
+      "unitType": "",
+      "startingSide": true,
+      "state": ""
+    },
+    {
+      "coordinates": {
+        "row": 3,
+        "col": 1
+      },
+      "color": "",
+      "unitType": "",
+      "startingSide": true,
+      "state": ""
+    },
+    {
+      "coordinates": {
+        "row": 3,
+        "col": 2
+      },
+      "color": "",
+      "unitType": "",
+      "startingSide": true,
+      "state": ""
+    },
+    {
+      "coordinates": {
+        "row": 3,
+        "col": 3
+      },
+      "color": "",
+      "unitType": "",
+      "startingSide": true,
+      "state": ""
+    },
+    {
+      "coordinates": {
+        "row": 3,
+        "col": 4
+      },
+      "color": "",
+      "unitType": "",
+      "startingSide": true,
+      "state": ""
+    },
+    {
+      "coordinates": {
+        "row": 3,
+        "col": 5
+      },
+      "color": "",
+      "unitType": "",
+      "startingSide": true,
+      "state": ""
+    }
+  ],
+  [
+    {
+      "coordinates": {
+        "row": 4,
+        "col": 0
+      },
+      "color": "",
+      "unitType": "",
+      "startingSide": true,
+      "state": ""
+    },
+    {
+      "coordinates": {
+        "row": 4,
+        "col": 1
+      },
+      "color": "",
+      "unitType": "",
+      "startingSide": true,
+      "state": ""
+    },
+    {
+      "coordinates": {
+        "row": 4,
+        "col": 2
+      },
+      "color": "",
+      "unitType": "",
+      "startingSide": true,
+      "state": ""
+    },
+    {
+      "coordinates": {
+        "row": 4,
+        "col": 3
+      },
+      "color": "",
+      "unitType": "",
+      "startingSide": true,
+      "state": ""
+    },
+    {
+      "coordinates": {
+        "row": 4,
+        "col": 4
+      },
+      "color": "",
+      "unitType": "",
+      "startingSide": true,
+      "state": ""
+    },
+    {
+      "coordinates": {
+        "row": 4,
+        "col": 5
+      },
+      "color": "",
+      "unitType": "",
+      "startingSide": true,
+      "state": ""
+    }
+  ],
+  [
+    {
+      "coordinates": {
+        "row": 5,
+        "col": 0
+      },
+      "color": "",
+      "unitType": "",
+      "startingSide": true,
+      "state": ""
+    },
+    {
+      "coordinates": {
+        "row": 5,
+        "col": 1
+      },
+      "color": "",
+      "unitType": "",
+      "startingSide": true,
+      "state": ""
+    },
+    {
+      "coordinates": {
+        "row": 5,
+        "col": 2
+      },
+      "color": "",
+      "unitType": "",
+      "startingSide": true,
+      "state": ""
+    },
+    {
+      "coordinates": {
+        "row": 5,
+        "col": 3
+      },
+      "color": "",
+      "unitType": "",
+      "startingSide": true,
+      "state": ""
+    },
+    {
+      "coordinates": {
+        "row": 5,
+        "col": 4
+      },
+      "color": "",
+      "unitType": "",
+      "startingSide": true,
+      "state": ""
+    },
+    {
+      "coordinates": {
+        "row": 5,
+        "col": 5
+      },
+      "color": "",
+      "unitType": "",
+      "startingSide": true,
+      "state": ""
+    }
+  ]
+]

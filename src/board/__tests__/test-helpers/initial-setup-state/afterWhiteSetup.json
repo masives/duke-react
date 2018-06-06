@@ -1,0 +1,10 @@
+{
+  "white": {
+    "dukeDrawn": true,
+    "footmanDrawn": 2
+  },
+  "black": {
+    "dukeDrawn": false,
+    "footmanDrawn": 0
+  }
+}
